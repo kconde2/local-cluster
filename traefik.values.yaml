@@ -1,4 +1,8 @@
 ---
+additionalArguments:
+    - --accesslog=true
+    - --log.level=DEBUG
+
 providers:
   kubernetesCRD:
     namespaces:
