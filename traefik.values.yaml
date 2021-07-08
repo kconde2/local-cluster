@@ -12,6 +12,8 @@ providers:
     namespaces:
       - default
       - traefik
+      - uat
+      - prod
 
 ports:
   traefik:
