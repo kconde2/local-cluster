@@ -21,3 +21,6 @@ nodes:
     - containerPort: 32090
       hostPort: 9000
       protocol: TCP
+  # extraMounts:
+  #   - hostPath: /home/kaba/kind/exports/
+  #     containerPath: /exports

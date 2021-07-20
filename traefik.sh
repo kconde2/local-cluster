@@ -13,3 +13,7 @@ kubectl apply -f mysql.deployment.yaml
 kubectl apply -f mysql.pv.yaml
 kubectl apply -f mysql.service.yaml
 kubectl apply -f https://raw.githubusercontent.com/stakater/Reloader/master/deployments/kubernetes/reloader.yaml
+
+mkdir -p /var/nfs/general/busybox/dev
+mkdir -p /var/nfs/general/busybox/uat
+mkdir -p /var/nfs/general/busybox/prod
