@@ -1,9 +1,19 @@
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
+name: my-cluster
 nodes:
 - role: worker
+  extraMounts:
+  - hostPath: /tmp/kube-storage/worker1
+    containerPath: /var/openebs/local/
 - role: worker
+  extraMounts:
+  - hostPath: /tmp/kube-storage/worker2
+    containerPath: /var/openebs/local/
 - role: worker
+  extraMounts:
+  - hostPath: /tmp/kube-storage/worker3
+    containerPath: /var/openebs/local/
 - role: control-plane
   kubeadmConfigPatches:
   - |
@@ -22,5 +32,5 @@ nodes:
       hostPort: 9000
       protocol: TCP
   # extraMounts:
-  #   - hostPath: /home/kaba/kind/exports/
+  #   - hostPath: /tmp/kind/exports/
   #     containerPath: /exports

@@ -4,6 +4,7 @@ helm repo add traefik https://helm.traefik.io/traefik
 helm repo update
 helm install traefik traefik/traefik -n traefik --create-namespace -f traefik.values.yaml
 # helm upgrade traefik traefik/traefik -n traefik --values traefik.values.yaml
+# kind create cluster --config="kind.config.yaml" --image="kindest/node:v2"
 
 kubectl create ns dev
 kubectl create ns uat
@@ -13,7 +14,3 @@ kubectl apply -f mysql.deployment.yaml
 kubectl apply -f mysql.pv.yaml
 kubectl apply -f mysql.service.yaml
 kubectl apply -f https://raw.githubusercontent.com/stakater/Reloader/master/deployments/kubernetes/reloader.yaml
-
-mkdir -p /var/nfs/general/busybox/dev
-mkdir -p /var/nfs/general/busybox/uat
-mkdir -p /var/nfs/general/busybox/prod
