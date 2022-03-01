@@ -1,5 +1,8 @@
-install:
-	chmod +x ./install.sh && ./install.sh
+start:
+	@chmod +x ./start.sh && ./start.sh
 
-uninstall:
-	chmod +x ./uninstall.sh && ./uninstall.sh
+stop:
+	@chmod +x ./stop.sh && ./stop.sh
+
+delete:
+	@chmod +x ./stop.sh && ./stop.sh --delete
