@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 
+# TODO: improve script with read -p
+# https://github.com/arashkaffamanesh/bonsai/blob/master/1-deploy-multipass-vms.sh
+
 workers=('worker1' 'worker2')
 masters=('master')
 nodes=("${masters[@]}" "${workers[@]}")
 
-echo
+
 # Create nodes
 for node in ${nodes[@]}; do
     # multipass launch --name "${node}" --cpus 1 --mem 2048M --disk 10G 20.04
@@ -20,10 +23,10 @@ for node in ${nodes[@]}; do
 done
 
 # export kubeconfig to manage cluster externally
-multipass exec master -- /snap/bin/microk8s.config > kubeconfig
+multipass exec master -- /snap/bin/microk8s.config > ~/.kube/multipass-node3
 multipass exec master -- microk8s status --wait-ready
 
-export KUBECONFIG=$(pwd)/kubeconfig
+#export KUBECONFIG=$(pwd)/kubeconfig
 
 # configure other nodes
 for worker in ${workers[@]}; do

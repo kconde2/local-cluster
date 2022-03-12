@@ -7,10 +7,10 @@ spec:
     - web
     - websecure
   routes:
-  - match: Host(`traefik.localhost`)
+  - match: Host(`traefik.k8s.com`)
     kind: Rule
     services:
     - name: api@internal
       kind: TraefikService
 
-# http://traefik.localhost
+# http://traefik.k8s.com

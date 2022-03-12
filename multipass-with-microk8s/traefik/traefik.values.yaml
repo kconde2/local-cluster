@@ -1,4 +1,8 @@
+# https://github.com/traefik/traefik-helm-chart/blob/master/traefik/values.yaml
 ---
+# deployment:
+#   kind: DaemonSet
+
 additionalArguments:
     - --accesslog=true
     - --log.level=DEBUG
@@ -15,14 +19,7 @@ providers:
       - uat
       - prod
 
+# Configure ports
 ports:
   traefik:
     expose: true
-    nodePort: 32090
-  web:
-    nodePort: 32080
-  websecure:
-    nodePort: 32443
-
-service:
-  type: NodePort
