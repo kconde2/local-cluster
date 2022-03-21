@@ -3,7 +3,7 @@
 - [Multipass MicroK8s](https://dzone.com/articles/-multipass-and-microk8s-the-quickest-route-to-ubun)
 - [Bash Devhints](https://devhints.io/bash)
 - [Install a local Kubernetes](https://ubuntu.com/tutorials/install-a-local-kubernetes-with-microk8s#1-overview)
-
+- [Multipass bash improve](https://github.com/kubernauts/bonsai/blob/master/1-deploy-multipass-vms.sh)
 
 # Troubleshooting
  - Do not forgot to edit `/etc/hosts` with ip and dns name `10.205.209.95  k8s.com traefik.k8s.com`

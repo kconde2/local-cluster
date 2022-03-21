@@ -1,8 +1,5 @@
 # https://github.com/traefik/traefik-helm-chart/blob/master/traefik/values.yaml
 ---
-# deployment:
-#   kind: DaemonSet
-
 additionalArguments:
     - --accesslog=true
     - --log.level=DEBUG
