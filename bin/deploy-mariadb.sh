@@ -16,12 +16,7 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 helm upgrade --install mariadb bitnami/mariadb \
     --namespace mariadb-cluster \
     --create-namespace \
-    --set architecture=replication \
-    --set global.storageClass=microk8s-hostpath \
-    --set auth.rootPassword=root \
-    --set volumePermissions.enabled=true \
-    --set secondary.replicaCount=2 \
-    --set auth.replicationPassword=root
+    -f ${BASE_PATH}/addons/mariadb/values.yaml
 
 # ** Please be patient while the chart is being deployed **
 

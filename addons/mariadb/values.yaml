@@ -1,0 +1,10 @@
+architecture: replication
+global:
+  storageClass: microk8s-hostpath
+auth:
+  rootPassword: root # be aware of changing this after first run
+  replicationPassword: root # be aware of changing this after firt run
+volumePermissions:
+  enabled: true
+secondary:
+  replicaCount: 1

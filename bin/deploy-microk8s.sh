@@ -27,7 +27,7 @@ for NODE in ${NODES}; do
     multipass exec ${NODE} -- sudo apt-get update
     multipass exec ${NODE} -- sudo apt-get install -y open-iscsi nfs-common jq
     multipass exec ${NODE} -- sudo systemctl enable --now iscsid
-    multipass exec ${NODE} -- sudo systemctl status iscsid.service
+    multipass exec ${NODE} -- sudo systemctl is-active --quiet iscsid.service && echo 'iscsid is running'
 
     multipass exec ${NODE} -- sudo snap alias microk8s.kubectl kubectl
 done
@@ -72,8 +72,11 @@ for WORKER in ${WORKERS}; do
 done
 
 sleep 10
-multipass exec k8s-master -- microk8s enable storage dns
-helm upgrade --install longhorn longhorn/longhorn --namespace longhorn-system --create-namespace --set csi.kubeletRootDir=/var/snap/microk8s/common/var/lib/kubelet
+multipass exec k8s-master -- microk8s enable storage dns # metrics-server prometheus
+
+# config map and secret reloader
+kubectl apply -f https://raw.githubusercontent.com/stakater/Reloader/master/deployments/kubernetes/reloader.yaml
+
 kubectl get nodes
 
 echo "are the nodes ready?"

@@ -1,0 +1,8 @@
+global:
+  storageClass: microk8s-hostpath
+redis:
+  password: root
+sentinel:
+  enabled: true
+volumePermissions:
+  enabled: true

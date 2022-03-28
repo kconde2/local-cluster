@@ -20,3 +20,10 @@ providers:
 ports:
   traefik:
     expose: true
+
+# deployment:
+#   kind: DaemonSet
+
+# persistence:
+#   enabled: true
+#   storageClass: longhorn

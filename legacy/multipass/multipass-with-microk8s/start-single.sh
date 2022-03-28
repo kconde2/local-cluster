@@ -13,7 +13,7 @@ multipass exec single-node -- microk8s config > ~/.kube/multipass-single-node
 multipass exec single-node -- microk8s status --wait-ready
 
 # config map and secret reloader
-kubectl apply -f https://raw.githubusercontent.com/stakater/Reloader/single-node/deployments/kubernetes/reloader.yaml
+kubectl apply -f https://raw.githubusercontent.com/stakater/Reloader/master/deployments/kubernetes/reloader.yaml
 
 multipass exec single-node -- microk8s kubectl cluster-info
 
