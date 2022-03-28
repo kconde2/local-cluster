@@ -23,15 +23,22 @@ spec:
         - name: MYSQL_DATABASE
           value: local_db
         - name: MYSQL_USER
-          value: admin
+          value: dbuser
         - name: MYSQL_PASSWORD
-          value: password
+          value: dbpassword
         ports:
         - containerPort: 3306
           name: mysql
         volumeMounts:
         - name: mysql-persistent-storage
           mountPath: /var/lib/mysql
+        resources:
+          limits:
+            cpu: "2"
+            memory: 1024Mi
+          requests:
+            cpu: "0.25"
+            memory: 512Mi
       volumes:
       - name: mysql-persistent-storage
         persistentVolumeClaim:

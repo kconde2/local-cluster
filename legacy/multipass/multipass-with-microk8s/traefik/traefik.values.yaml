@@ -1,0 +1,22 @@
+# https://github.com/traefik/traefik-helm-chart/blob/master/traefik/values.yaml
+---
+additionalArguments:
+    - --accesslog=true
+    - --log.level=DEBUG
+
+providers:
+  kubernetesCRD:
+    namespaces:
+      - default
+      - traefik
+  kubernetesIngress:
+    namespaces:
+      - default
+      - traefik
+      - uat
+      - prod
+
+# Configure ports
+ports:
+  traefik:
+    expose: true
