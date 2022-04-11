@@ -26,3 +26,13 @@ else
     echo "The helm binary (helm or helm.exe) is not available or not in your \$PATH"
     exit 1
 fi
+
+if [ -x "$(command -v hostctl)" ] >/dev/null 2>&1; then
+    # Linux/MacOS
+    HOSTCTLCMD="hostctl"
+else
+    echo "The hostctl binary hostctl is not available or not in your \$PATH"
+    exit 1
+fi
+
+echo "=== All dependencies are presents in your OS ==="

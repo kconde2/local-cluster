@@ -22,6 +22,7 @@ for NODE in ${NODES}; do
     # You may need to configure your firewall to allow pod-to-pod and pod-to-internet communication
     multipass exec ${NODE} -- sudo ufw allow in on cni0 && sudo ufw allow out on cni0
     multipass exec ${NODE} -- sudo ufw default allow routed
+    multipass exec ${NODE} -- sudo iptables -P FORWARD ACCEPT
 
     # longhorn dependencies
     multipass exec ${NODE} -- sudo apt-get update

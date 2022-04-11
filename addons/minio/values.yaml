@@ -1,0 +1,14 @@
+# know issues : https://github.com/bitnami/charts/issues/9187
+mode: distributed
+global:
+  storageClass: microk8s-hostpath
+persistence:
+  size: 8Gi
+volumePermissions:
+  enabled: true
+auth:
+  rootUser: access1234
+  rootPassword: secret1234
+ingress:
+  enabled: true
+  hostname: minio.k8s.com

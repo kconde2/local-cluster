@@ -11,10 +11,10 @@ nodeCount="${inputNode:-$nodeCount}"
 cpuCount=2
 read -p "How many cpus do you want per node? (default:$cpuCount) promt with [ENTER]:" inputCpu
 cpuCount="${inputCpu:-$cpuCount}"
-memCount=2
+memCount=4
 read -p "How many gigabyte memory do you want per node? (default:$memCount) promt with [ENTER]:" inputMem
 memCount="${inputMem:-$memCount}"
-diskCount=20
+diskCount=40
 read -p "How many gigabyte diskspace do you want per node? (default:$diskCount) promt with [ENTER]:" inputDisk
 diskCount="${inputDisk:-$diskCount}"
 

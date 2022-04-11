@@ -21,6 +21,9 @@ ports:
   traefik:
     expose: true
 
+# DaemonSet here is used to provide high availibility traefik
+# It has to be configured with consistent persistence volume longhorn
+# to avoid losing critical data on production
 # deployment:
 #   kind: DaemonSet
 
