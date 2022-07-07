@@ -1,0 +1,46 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Alertmanager
+metadata:
+  namespace: monitoring
+  name: example
+spec:
+  replicas: 3
+  alertmanagerConfigSelector:
+    matchLabels:
+      alertmanagerConfig: example
+---
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: config-example
+  namespace: monitoring
+  # labels:
+  #   alertmanagerConfig: example
+spec:
+  route:
+    groupBy: ['severity']
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 1m
+    receiver: telegram-example
+    routes:
+    - match:
+        severity: critical
+      receiver: telegram-example
+  receivers:
+  - name: telegram-example
+    telegramConfigs:
+    - apiURL: 'https://api.telegram.org'
+      botToken:
+        name: 'telegram-config'
+        key: 'botToken'
+      chatID: 970332782
+---
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+  name: telegram-config
+  namespace: monitoring
+data:
+  botToken: QUFISkN6bzhYRDYwNHBLekxLcVNzLUZUTDk3RW5Hdmh4TFU=

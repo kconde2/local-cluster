@@ -14,23 +14,22 @@ NODES="${MASTERS} ${WORKERS}"
 
 echo -e "[${LB}Info${NC}] deploy microk8s on all nodes (including master)"
 for NODE in ${NODES}; do
-    echo ${node}
-    multipass exec ${NODE} -- sudo snap install microk8s --classic
-    multipass exec ${NODE} -- sudo usermod -a -G microk8s ubuntu
-    multipass exec ${NODE} -- sudo chown -f -R ubuntu ~/.kube
+    multipass exec "${NODE}" -- sudo snap install microk8s --classic
+    multipass exec "${NODE}" -- sudo usermod -a -G microk8s ubuntu
+    multipass exec "${NODE}" -- sudo chown -f -R ubuntu ~/.kube
 
     # You may need to configure your firewall to allow pod-to-pod and pod-to-internet communication
-    multipass exec ${NODE} -- sudo ufw allow in on cni0 && sudo ufw allow out on cni0
-    multipass exec ${NODE} -- sudo ufw default allow routed
-    multipass exec ${NODE} -- sudo iptables -P FORWARD ACCEPT
+    multipass exec "${NODE}" -- sudo ufw allow in on cni0 && sudo ufw allow out on cni0
+    multipass exec "${NODE}" -- sudo ufw default allow routed
+    multipass exec "${NODE}" -- sudo iptables -P FORWARD ACCEPT
 
     # longhorn dependencies
-    multipass exec ${NODE} -- sudo apt-get update
-    multipass exec ${NODE} -- sudo apt-get install -y open-iscsi nfs-common jq
-    multipass exec ${NODE} -- sudo systemctl enable --now iscsid
-    multipass exec ${NODE} -- sudo systemctl is-active --quiet iscsid.service && echo 'iscsid is running'
+    multipass exec "${NODE}" -- sudo apt-get update
+    multipass exec "${NODE}" -- sudo apt-get install -y open-iscsi nfs-common jq
+    multipass exec "${NODE}" -- sudo systemctl enable --now iscsid
+    multipass exec "${NODE}" -- sudo systemctl is-active --quiet iscsid.service && echo 'iscsid is running'
 
-    multipass exec ${NODE} -- sudo snap alias microk8s.kubectl kubectl
+    multipass exec "${NODE}" -- sudo snap alias microk8s.kubectl kubectl
 done
 
 echo "############################################################################"
@@ -45,11 +44,11 @@ export KUBECONFIG=$(pwd)/k3s.yaml && echo -e "[${LB}Info${NC}] setting KUBECONFI
 # echo -e "[${LB}Info${NC}] tainting master node: k8s-master"
 # kubectl taint node k8s-master node-role.kubernetes.io/master=effect:NoSchedule
 echo -e "[${LB}Info${NC}] joining all workers"
-echo ${WORKERS}
+echo "${WORKERS}"
 for WORKER in ${WORKERS}; do
     echo -e "[${LB}Info${NC}] deploy microk8s on ${WORKER}"
     JOIN_COMMAND=$(multipass exec k8s-master -- microk8s add-node | head -n 2 | tail -1)
-    multipass exec ${WORKER} -- $JOIN_COMMAND --worker
+    multipass exec ${WORKER} -- $JOIN_COMMAND # --worker
 done
 echo "############################################################################"
 echo -e "[${GREEN}All nodes have joined the cluster ${NC}]"

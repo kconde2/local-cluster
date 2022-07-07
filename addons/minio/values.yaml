@@ -3,7 +3,8 @@ mode: distributed
 global:
   storageClass: microk8s-hostpath
 persistence:
-  size: 8Gi
+  size: 2Gi
+  storageClass: microk8s-hostpath
 volumePermissions:
   enabled: true
 auth:
@@ -11,4 +12,11 @@ auth:
   rootPassword: secret1234
 ingress:
   enabled: true
-  hostname: minio.k8s.com
+  hostname: minio.2d9baa17.nip.io
+apiIngress:
+  enabled: true
+  hostname: api.minio.2d9baa17.nip.io
+securityContext:
+  enabled: true
+  fsGroup: 1001
+  runAsUser: 1001

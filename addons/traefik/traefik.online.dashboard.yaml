@@ -1,0 +1,38 @@
+# TODO: [secure dashboard](https://blog.zachinachshon.com/traefik-ingress/)
+
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: Middleware
+# metadata:
+#   name: security
+#   namespace: traefik
+# spec:
+#   headers:
+#     frameDeny: true
+#     sslRedirect: true
+#     browserXssFilter: true
+#     contentTypeNosniff: true
+#     stsIncludeSubdomains: true
+#     stsPreload: true
+#     stsSeconds: 31536000
+# ---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-dashboard
+  namespace: traefik
+spec:
+  entryPoints:
+    - web
+    # - websecure
+  routes:
+  - match: Host(`traefik.2d9baa17.nip.io`)
+    kind: Rule
+    services:
+    - name: api@internal
+      kind: TraefikService
+    # middlewares:
+    # - name: security
+  # tls:
+  #   certResolver: letsencrypt
+
+# http://traefik.2d9baa17.nip.io

@@ -1,0 +1,21 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  creationTimestamp: null
+  labels: # same labels as Prometheus CRD
+    prometheus: k8s
+    role: alert-rules
+  name: prometheus-example-rules
+  namespace: monitoring
+spec:
+  groups:
+  - name: example.rules
+    rules:
+    - alert: ExampleOfAlert
+      labels:
+        severity: critical
+      expr: vector(1) # node_load1 >= 0.6
+      for: 10s
+      annotations:
+        summary: This is an example of summary alert always firing up
+        description: "{{ $labels.instance }} - too many load in '{{ $labels.namespace }}' namespace"
